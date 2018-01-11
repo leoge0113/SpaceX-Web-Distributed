@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spacex_distributed_tools/spacex_distributed_tools.iml" filepath="$PROJECT_DIR$/spacex_distributed_tools/spacex_distributed_tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spacex_parent/spacex_parent.iml" filepath="$PROJECT_DIR$/spacex_parent/spacex_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spacex_web_distributed.iml" filepath="$PROJECT_DIR$/spacex_web_distributed.iml" />
+    </modules>
+  </component>
+</project>
