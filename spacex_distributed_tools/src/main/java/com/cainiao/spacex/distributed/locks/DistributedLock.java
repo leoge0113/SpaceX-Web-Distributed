@@ -23,7 +23,7 @@ public class DistributedLock implements DistributedReentrantLock {
     private CuratorFramework client;
 
     public DistributedLock(CuratorFramework client, String lockId) {
-
+        init(client, lockId);
     }
 
     private void init(CuratorFramework client, String lockId) {
