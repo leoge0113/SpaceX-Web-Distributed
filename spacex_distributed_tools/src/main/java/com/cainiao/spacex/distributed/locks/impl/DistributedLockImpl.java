@@ -1,6 +1,6 @@
-package com.cainiao.spacex.distributed.locks;
+package com.cainiao.spacex.distributed.locks.impl;
 
-import org.apache.curator.CuratorZookeeperClient;
+import com.cainiao.spacex.distributed.locks.DistributedReentrantLock;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.zookeeper.KeeperException;
@@ -12,8 +12,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class DistributedLock implements DistributedReentrantLock {
-    private static final Logger LOG = LoggerFactory.getLogger(DistributedLock.class);
+public class DistributedLockImpl implements DistributedReentrantLock {
+    private static final Logger LOG = LoggerFactory.getLogger(DistributedLockImpl.class);
     private static final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(4);
     private static final String ROOT_PATH = "/ROOT_LOCK";
     private String path;
@@ -22,8 +22,8 @@ public class DistributedLock implements DistributedReentrantLock {
     private InterProcessMutex interProcessMutex;
     private CuratorFramework client;
 
-    public DistributedLock(CuratorFramework client, String lockId) {
-
+    public DistributedLockImpl(CuratorFramework client, String lockId) {
+        init(client, lockId);
     }
 
     private void init(CuratorFramework client, String lockId) {
