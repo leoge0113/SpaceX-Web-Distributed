@@ -1,4 +1,4 @@
-package com.yingjun.ssm.common.util.number;
+package com.cainiao.common.util.number;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

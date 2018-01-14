@@ -1,4 +1,4 @@
-package com.yingjun.ssm.common.validator;
+package com.cainiao.common.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

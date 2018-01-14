@@ -1,4 +1,4 @@
-package com.yingjun.ssm.common.util;
+package com.cainiao.common.util;
 
 import java.util.Random;
 

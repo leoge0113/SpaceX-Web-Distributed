@@ -1,10 +1,6 @@
-package com.yingjun.ssm.common.model;
+package com.cainiao.common.model;
 
-/**
- *
-* @author yingjun
-*
-*/
+
 public class MailParam {
 
 	/** 发件人 **/

@@ -1,4 +1,4 @@
-package com.yingjun.ssm.common.util.validate;
+package com.cainiao.common.util.validate;
 
 import java.util.regex.Pattern;
 

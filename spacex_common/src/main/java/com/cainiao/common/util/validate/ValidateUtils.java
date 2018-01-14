@@ -1,25 +1,16 @@
-package com.yingjun.ssm.common.util.validate;
+package com.cainiao.common.util.validate;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
-
 
 /**
- * 
- * @描述: 验证工具类.
- * @作者: WuShuicheng .
- * @创建时间: 2013-8-9,上午10:15:34 .
  * @版本: 1.0 .
  */
 public class ValidateUtils {
