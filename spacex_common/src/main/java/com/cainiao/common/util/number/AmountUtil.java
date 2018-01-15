@@ -83,7 +83,7 @@ public abstract class AmountUtil {
      * @param scale小数点后保留几位
      * @return
      */
-    public static double round(double v, int scale) {
+    public static double round(double v, int scale) {//scale 小数点后数字的位数
         if (scale < 0) {
             throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
@@ -150,6 +150,7 @@ public abstract class AmountUtil {
     public static boolean lessThan(double a, double b) {
         BigDecimal v1 = BigDecimal.valueOf(a);
         BigDecimal v2 = BigDecimal.valueOf(b);
+
         if (v1.compareTo(v2) == -1) {
             return true;
         }
