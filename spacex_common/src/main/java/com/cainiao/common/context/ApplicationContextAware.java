@@ -5,6 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 /*
 @Lazy
 默认情况下，Spring 容器在初始化过程中会创建和配置所有单例的bean。
@@ -29,6 +31,7 @@ public class ApplicationContextAware implements org.springframework.context.Appl
     @Override
     public void setApplicationContext(ApplicationContext var1) throws BeansException {
         this.ctx = var1;
+
     }
 
     public ApplicationContext getApplicationContext() {
