@@ -12,11 +12,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DistributedLockTest {
     @Test
     public void testTry() throws InterruptedException {
-        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
-        CuratorFramework client = CuratorFrameworkFactory.newClient("192.168.253.131:2181", retryPolicy);
-        client.start();
-        final DistributedReentrantLockExeTempImpl template = new DistributedReentrantLockExeTempImpl(client);
-        int size = 10;
+//        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+//        CuratorFramework client = CuratorFrameworkFactory.newClient("192.168.253.131:2181", retryPolicy);
+//        client.start();
+        final DistributedReentrantLockExeTempImpl template = new DistributedReentrantLockExeTempImpl();
+        int size = 1;
         final CountDownLatch startCountDownLatch = new CountDownLatch(1);
         final CountDownLatch endDownLatch = new CountDownLatch(size);
         for (int i = 0; i < size; i++) {
@@ -28,7 +28,7 @@ public class DistributedLockTest {
                         Thread.currentThread().interrupt();
                     }
                     final int sleepTime = ThreadLocalRandom.current().nextInt(5) * 1000;
-                    template.execute("test1", 5000, new ExecuteCallBack() {
+                    template.execute("test13", 5000, new ExecuteCallBack() {
                         public Object onGetLock() throws InterruptedException {
                             System.out.println(Thread.currentThread().getName() + ":getLock");
                             Thread.currentThread().sleep(sleepTime);

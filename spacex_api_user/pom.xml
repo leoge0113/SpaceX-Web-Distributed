@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../spacex_parent</relativePath>
     </parent>
-    <groupId>cainiao</groupId>
+    <groupId>com.cainiao</groupId>
     <artifactId>spacex_api_user</artifactId>
     <version>${spacex_api_user.version}</version>
     <packaging>jar</packaging>

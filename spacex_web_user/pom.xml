@@ -6,12 +6,20 @@
         <artifactId>spacex_parent</artifactId>
         <groupId>com.cainiao</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../spacex_parent/pom.xml</relativePath>
+        <relativePath>../spacex_parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spacex_web_user</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${spacex_web_user.version}</version>
+    <packaging>war</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.cainiao</groupId>
+            <artifactId>spacex_api_user</artifactId>
+            <version>${spacex_api_user.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

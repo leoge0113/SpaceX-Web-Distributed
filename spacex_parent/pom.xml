@@ -33,7 +33,10 @@
     <modules>
 
         <module>../spacex_distributed_tools</module>
-
+        <module>../spacex_service_user</module>
+        <module>../spacex_api_user</module>
+        <module>../spacex_common</module>
+        <module>../spacex_web_user</module>
     </modules>
 
 

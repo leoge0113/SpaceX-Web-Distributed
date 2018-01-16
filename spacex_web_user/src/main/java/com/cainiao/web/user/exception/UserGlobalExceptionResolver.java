@@ -1,7 +1,7 @@
-package com.yingjun.ssm.web.user.exception;
+package com.cainiao.web.user.exception;
 
 import com.alibaba.fastjson.JSON;
-import com.yingjun.ssm.common.dto.BaseResult;
+import com.cainiao.common.dto.BaseResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

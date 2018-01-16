@@ -40,10 +40,10 @@
     </bean>
 
     <!--4:扫描web相关的bean-->
-    <context:component-scan base-package="com.yingjun.ssm.web.user.controller"/>
+    <context:component-scan base-package="com.cainiao.web.user.controller"/>
 
     <!--5:全局异常捕捉 -->
-    <bean class="com.yingjun.ssm.web.user.exception.UserGlobalExceptionResolver" />
+    <bean class="com.cainiao.web.user.exception.UserGlobalExceptionResolver" />
 
 
 </beans>
