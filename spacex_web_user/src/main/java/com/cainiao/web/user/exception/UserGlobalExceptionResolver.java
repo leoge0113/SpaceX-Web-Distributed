@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 /**
  * 错误信息统一处理
  * 对未处理的错误信息做一个统一处理
- * @author yingjun
+
  *
  */
 @Component

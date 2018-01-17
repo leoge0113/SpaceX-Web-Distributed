@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * 自定义validator标签(和 hibernate validator组合使用)
  * 
- * @author yingjun
+
  *
  */
 @Constraint(validatedBy = Not999Validator.class) // 具体的实现
@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 public @interface Not999 {
 
 	// 提示信息,可以写死,可以填写国际化的key
-	String message() default "{com.yingjun.ssm.common.validator.not999}";
+	String message() default "{com.cainiao.common.validator.not999}";
 
 	// 下面这两个属性必须添加
 	Class<?>[] groups() default {};

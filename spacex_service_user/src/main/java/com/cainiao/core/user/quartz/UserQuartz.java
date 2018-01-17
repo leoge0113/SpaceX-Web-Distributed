@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
  * L  字符仅被用于天（月）和天（星期）两个子表达式，表示一个月的最后一天或者一个星期的最后一天
  * 6L 可以表示倒数第６天
  *
- * @author yingjun
+
  */
 @Component
 public class UserQuartz {
