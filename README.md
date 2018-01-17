@@ -1,7 +1,7 @@
 # SpaceX-Web-Distributed
 web分布式开发框架；实现分布式锁，队列等；SpaceX-Web的分布式版本。
 
-# zookeeper锁实现
+# zookeeper锁实现（curator实现）
 ## 可重入锁
 ```
 private static class LockData
@@ -19,91 +19,8 @@ private static class LockData
 ```
 其中lockCount记录获取到锁的线程进入次数。
 ## 实现的是悲观锁，会阻塞
-函数 internalLockLoop，如下，当发现自己不是第一个node时，调用Object.wait()。
+函数 internalLockLoop，当发现自己不是第一个node时，调用Object.wait()。
 watcher实现里有notify，接到现象后继续判断自己是不是得到锁。
-
-```
- private boolean internalLockLoop(long startMillis, Long millisToWait, String ourPath) throws Exception
-    {
-        boolean     haveTheLock = false;
-        boolean     doDelete = false;
-        try
-        {
-            if ( revocable.get() != null )
-            {
-                client.getData().usingWatcher(revocableWatcher).forPath(ourPath);
-            }
-
-            while ( (client.getState() == CuratorFrameworkState.STARTED) && !haveTheLock )
-            {
-                List<String>        children = getSortedChildren();
-                String              sequenceNodeName = ourPath.substring(basePath.length() + 1); // +1 to include the slash
-
-                PredicateResults    predicateResults = driver.getsTheLock(client, children, sequenceNodeName, maxLeases);
-                if ( predicateResults.getsTheLock() )
-                {
-                    haveTheLock = true;
-                }
-                else
-                {
-                    String  previousSequencePath = basePath + "/" + predicateResults.getPathToWatch();
-
-                    synchronized(this)
-                    {
-                        try 
-                        {
-                            // use getData() instead of exists() to avoid leaving unneeded watchers which is a type of resource leak
-                           
-                           //watch里有nodify client.getData().usingWatcher(watcher).forPath(previousSequencePath);
-                            if ( millisToWait != null )
-                            {
-                                millisToWait -= (System.currentTimeMillis() - startMillis);
-                                startMillis = System.currentTimeMillis();
-                                if ( millisToWait <= 0 )
-                                {
-                                    doDelete = true;    // timed out - delete our node
-                                    break;
-                                }
-
-                                wait(millisToWait);
-                            }
-                            else
-                            {
-                                wait();
-                            }
-                        }
-                        catch ( KeeperException.NoNodeException e ) 
-                        {
-                            // it has been deleted (i.e. lock released). Try to acquire again
-                        }
-                    }
-                }
-            }
-        }
-        catch ( Exception e )
-        {
-            doDelete = true;
-            throw e;
-        }
-        finally
-        {
-            if ( doDelete )
-            {
-                deleteOurPath(ourPath);
-            }
-        }
-        return haveTheLock;
-    }
-    
-    private final Watcher watcher = new Watcher()
-    {
-        @Override
-        public void process(WatchedEvent event)
-        {
-            notifyFromWatcher();
-        }
-    };
-```
 ## curator与zookeeper版本
 curator 4.0.0，zookeeper 3.5X 或者其他二者配套版本。
 版本不匹配会出现诸如以下错误。
@@ -117,5 +34,41 @@ java.io.IOException: Xid out of order.
 ```
 [org.apache.curator.utils.ZKPaths] - The version of ZooKeeper being used doesn't support Container nodes. CreateMode.PERSISTENT will be used instead.
 ```
+# curator实现分布式锁问题
+在 spring frame work下回报错：
+```
+2018-01-17 14:23:00,001 ERROR[org.springframework.scheduling.support.TaskUtils$L
+oggingErrorHandler:95]- Unexpected error occurred in scheduled task.
+java.lang.NoSuchMethodError: 
+org.apache.curator.utils.PathUtils.validatePath(Ljava/lang/String;)Ljava/lang/String;
+```
+很奇怪在junit里不报错。还不知道why。
+
+curator代码确实是有问题，如下：
+```
+InterProcessMutex(CuratorFramework client, String path, String lockName, int maxLeases, LockInternalsDriver driver)
+    {
+        basePath = PathUtils.validatePath(path);
+        internals = new LockInternals(client, driver, path, lockName, maxLeases);
+    }
+    public static void validatePath(String path) throws IllegalArgumentException;
+```
+# Idea 调试jar运行的进程
+## jar运行
+```
+java -Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y -jar spacex_service_user.1.0.0.jar
+```
+## 运行结果
+```
+Listening for transport dt_socket at address: 5005
+```
+## 配置IDEA
+run/debug configuration->remote->
+
+transport:socket
+
+debugger mode:attach
+
+host: localhost port:5005
 
 

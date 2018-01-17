@@ -52,7 +52,7 @@ public class UserQuartz {
     @Scheduled(cron = "0 0/1 9-17 * * ? ")
     public void addUserScore() throws KeeperException, InterruptedException {
         DistributedReentrantLockExeTempImpl distributedReentrantLockExeTemp = new DistributedReentrantLockExeTempImpl();
-        distributedReentrantLockExeTemp.execute("quartz", 500, new ExecuteCallBack() {
+        distributedReentrantLockExeTemp.execute("quartz", 5000, new ExecuteCallBack() {
             @Override
             public Object onGetLock() throws InterruptedException {
                 userDao.addScore(10);
@@ -64,6 +64,7 @@ public class UserQuartz {
                 return null;
             }
         });
+
        // if (lock.tryLock()) {
           //  LOG.info("@Scheduled--------addUserScore()");
             //userDao.addScore(10);
