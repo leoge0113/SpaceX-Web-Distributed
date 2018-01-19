@@ -35,7 +35,7 @@ java.io.IOException: Xid out of order.
 [org.apache.curator.utils.ZKPaths] - The version of ZooKeeper being used doesn't support Container nodes. CreateMode.PERSISTENT will be used instead.
 ```
 # curator实现分布式锁问题
-在 spring frame work下回报错：
+在 spring framework 定时任务下回报错：
 ```
 2018-01-17 14:23:00,001 ERROR[org.springframework.scheduling.support.TaskUtils$L
 oggingErrorHandler:95]- Unexpected error occurred in scheduled task.
@@ -70,5 +70,12 @@ transport:socket
 debugger mode:attach
 
 host: localhost port:5005
+# curator分布式锁在spring定是任性下执行失败分析
+定时任务的实质：实现runnable的线程ScheduledMethodRunnable的schedule执行。
+在ScheduledMethodRunnable里通过反射执行有@Schedule注解的定时方法。
+反射执行时，找不到curator里的validatePath方法。与普通方法执行不一样，
+反射执行首先根据类文件里方法声明做判断方法是否存在。
+
+
 
 

@@ -24,14 +24,24 @@ public class DistributedLockImpl implements DistributedReentrantLock {
     private CuratorFramework client;
 
     public DistributedLockImpl(CuratorFramework client, String lockId) {
-        init(client, lockId);
+        try {
+             init(client, lockId);
+        } catch (Exception e) {//catch 不到
+            System.out.println("===>catch interprocessnutex exception too!");
+            throw e;
+        }
     }
-    
+
 
     private void init(CuratorFramework client, String lockId) {
         this.client = client;
         this.path = ROOT_PATH + lockId;
-        this.interProcessMutex = new InterProcessMutex(client, path);
+        try {
+            this.interProcessMutex = new InterProcessMutex(client, path);
+        } catch (Exception e) {//catch 不到
+            System.out.println("===>catch interprocessnutex exception!");
+            throw e;
+        }
     }
 
     @Override
