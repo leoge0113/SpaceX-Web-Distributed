@@ -76,5 +76,4 @@ host: localhost port:5005
 反射执行时，找不到curator里的validatePath方法。与普通方法执行不一样，
 反射执行首先根据类文件里方法声明做判断方法是否存在。
 
-fix bug1
 
